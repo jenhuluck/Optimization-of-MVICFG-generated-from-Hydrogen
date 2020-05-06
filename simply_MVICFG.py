@@ -136,11 +136,17 @@ def find_neighbors(matrix, row):
 #construct a graph dot file of a simplied graph
 def print_graph(nodes, edges, label_dict, lines, file, entry, exit, source_dict):
 	#header part
+	flag = False
 	for line in lines:
 		file.write(line)
-		if 'label="main"' in line:
-			break
+		if flag:
+			break # read until the next line of subgraph
+		if 'subgraph' in line:
+			flag = True
+
+
 	#nodes part
+
 	for node in nodes:
 		if node == entry:
 			line = f'"{node}" [label="{label_dict[node]}::Entry"]\n'
@@ -149,7 +155,9 @@ def print_graph(nodes, edges, label_dict, lines, file, entry, exit, source_dict)
 		else:
 			source_line = label_dict[node]
 			if source_line in source_dict:
-				line = f'"{node}" [label="{label_dict[node]}:: {source_dict[source_line]}"]\n'
+				source_code = (source_dict[source_line]).replace('"',"'")
+				#source_code = (source_dict[source_line])
+				line = f'"{node}" [label="{label_dict[node]}:: {source_code}"]\n'
 			else:
 				line = f'"{node}" [label="{label_dict[node]}"]\n'
 		file.write(line)
@@ -177,7 +185,7 @@ if __name__ == '__main__':
 	# the format of the command should be like #python simply_MVICFG.py sum1.c sum2.c ...
 	assert argc > 1, "Please provide source code! For example, prog.c"
 
-	readFile = open('MVICFG.dot', 'r')
+	readFile = open('MVICFG_subcluster.dot', 'r')
 	lines = readFile.readlines()
 
 	entry = find_entry(lines)
@@ -193,6 +201,8 @@ if __name__ == '__main__':
 	edges = []
 	get_edges_and_nodes(graph, node_set,edges)
 
+	#print(node_set)
+	#print(edges)
 	source_file = sys.argv[-1] # find the last version. If the path label debugged, all versions are required.
 	read_source = open(source_file, 'r')
 	source_lines = read_source.readlines()
@@ -206,6 +216,7 @@ if __name__ == '__main__':
 	writeFile = open("MVICFG_simple.dot","w")
 	print_graph(node_set, edges, label_dict, lines, writeFile, entry, exit, source_dict)
 
-
 	readFile.close()
 	writeFile.close()
+
+	os.system("dot -Tps MVICFG_simple.dot -o MVICFG_simple.ps")
