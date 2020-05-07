@@ -1,0 +1,63 @@
+digraph "MVICFG" {
+	label="MVICFG";
+/* Generating Nodes */
+	subgraph cluster_1 {
+		label="main";
+		"21" [label="4294967294::Entry::main"];
+		"2" [label="5::  %1 = alloca i32, align 4"];
+		"3" [label="5::  %2 = alloca i32, align 4"];
+		"4" [label="5::  call void @llvm.dbg.declare(metadata i32* %1, metadata !12, metadata !DIExpression()), !dbg !14"];
+		"5" [label="5::  call void @llvm.dbg.declare(metadata i32* %2, metadata !15, metadata !DIExpression()), !dbg !16"];
+		"6" [label="7::  %3 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([20 x i8], [20 x i8]* @.str, i32 0, i32 0)), !dbg !17"];
+		"7" [label="8::  %4 = call i32 (i8*, ...) @__isoc99_scanf(i8* getelementptr inbounds ([3 x i8], [3 x i8]* @.str.1, i32 0, i32 0), i32* %1), !dbg !18"];
+		"8" [label="9::  %5 = load i32, i32* %1, align 4, !dbg !19"];
+		"9" [label="9::  %6 = srem i32 %5, 2, !dbg !20"];
+		"10" [label="9::  store i32 %6, i32* %2, align 4, !dbg !21"];
+		"11" [label="0::  %7 = load i32, i32* %2, align 4, !dbg !22"];
+		"12" [label="0::  %8 = icmp eq i32 %7, 0, !dbg !24"];
+		"13" [label="0::  br i1 %8, label %9, label %12, !dbg !25"];
+		"14" [label="11::  %10 = load i32, i32* %1, align 4, !dbg !26"];
+		"15" [label="11::  %11 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([23 x i8], [23 x i8]* @.str.2, i32 0, i32 0), i32 %10), !dbg !27"];
+		"16" [label="11::  br label %15, !dbg !27"];
+		"17" [label="13::  %13 = load i32, i32* %1, align 4, !dbg !28"];
+		"18" [label="13::  %14 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([22 x i8], [22 x i8]* @.str.3, i32 0, i32 0), i32 %13), !dbg !29"];
+		"19" [label="13::  br label %15"];
+		"20" [label="14::  ret void, !dbg !30"];
+		"22" [label="4294967293::Exit::main"];
+		"28" [label="10::  %7 = load i32, i32* %2, align 4, !dbg !22"];
+		"29" [label="10::  %8 = icmp eq i32 %7, 1, !dbg !24"];
+		"30" [label="10::  br i1 %8, label %9, label %12, !dbg !25"];
+	}
+	subgraph cluster_26 {
+		label="External_Node_Func";
+		"27" [label="4294967294::External_Node"];
+	}
+
+/* Generating Edges */
+		"2" -> "3" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+		"3" -> "4" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+		"4" -> "5" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+		"8" -> "9" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+		"9" -> "10" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+		"11" -> "12" [arrowhead = normal, penwidth = 1.0, color = black, label="V1"];
+		"12" -> "13" [arrowhead = normal, penwidth = 1.0, color = black, label="V1"];
+		"14" -> "15" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+		"15" -> "16" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+		"17" -> "18" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+		"18" -> "19" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+		"21" -> "2" [arrowhead = normal, penwidth = 1.0, color = pink, label="V1,V2::Virtual"];
+		"20" -> "22" [arrowhead = normal, penwidth = 1.0, color = pink, label="V1,V2::Virtual"];
+		"5" -> "6" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+		"6" -> "7" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+		"7" -> "8" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+		"10" -> "11" [arrowhead = normal, penwidth = 1.0, color = black, label="V1"];
+		"13" -> "14" [arrowhead = dot, penwidth = 1.0, color = black, label="V1::Branch"];
+		"13" -> "17" [arrowhead = dot, penwidth = 1.0, color = black, label="V1::Branch"];
+		"16" -> "20" [arrowhead = dot, penwidth = 1.0, color = black, label="V1,V2::Branch"];
+		"19" -> "20" [arrowhead = dot, penwidth = 1.0, color = black, label="V1,V2::Branch"];
+		"10" -> "28" [arrowhead = normal, penwidth = 1.0, color = black, label="V2"];
+		"30" -> "14" [arrowhead = dot, penwidth = 1.0, color = black, label="V2::Branch"];
+		"30" -> "17" [arrowhead = dot, penwidth = 1.0, color = black, label="V2::Branch"];
+		"28" -> "29" [arrowhead = normal, penwidth = 1.0, color = black, label="V2"];
+		"29" -> "30" [arrowhead = normal, penwidth = 1.0, color = black, label="V2"];
+}

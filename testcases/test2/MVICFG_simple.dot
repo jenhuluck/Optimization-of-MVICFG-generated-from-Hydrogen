@@ -1,0 +1,35 @@
+digraph "MVICFG" {
+	label="MVICFG";
+/* Generating Nodes */
+	subgraph cluster_1 {
+		label="main";
+"2" [label="5:: int ival, remainder;"]
+"6" [label="7:: printf('Enter an integer : ');"]
+"7" [label="8:: scanf('%d', &ival);"]
+"8" [label="9:: remainder = ival % 2;"]
+"11" [label="0"]
+"14" [label="11:: printf('%d is an even integer\n', ival);"]
+"15" [label="11:: printf('%d is an even integer\n', ival);"]
+"17" [label="13:: printf('%d is an odd integer\n', ival);"]
+"18" [label="13:: printf('%d is an odd integer\n', ival);"]
+"20" [label="14:: }"]
+"21" [label="4294967294::Entry"]
+"22" [label="4294967293::Exit"]
+"28" [label="10:: if (remainder == 1)"]
+}
+"2" -> "6" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"6" -> "7" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"7" -> "8" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"8" -> "11" [arrowhead = normal, penwidth = 1.0, color = red, label="V1"];
+"8" -> "28" [arrowhead = normal, penwidth = 1.0, color = green, label="V2"];
+"11" -> "14" [arrowhead = normal, penwidth = 1.0, color = red, label="V1"];
+"11" -> "17" [arrowhead = normal, penwidth = 1.0, color = red, label="V1"];
+"14" -> "15" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"15" -> "20" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"17" -> "18" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"18" -> "20" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"20" -> "22" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"21" -> "2" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"28" -> "14" [arrowhead = normal, penwidth = 1.0, color = green, label="V2"];
+"28" -> "17" [arrowhead = normal, penwidth = 1.0, color = green, label="V2"];
+}
