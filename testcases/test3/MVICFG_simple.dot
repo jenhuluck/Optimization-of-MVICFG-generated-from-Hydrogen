@@ -1,0 +1,27 @@
+digraph "MVICFG" {
+	label="MVICFG";
+/* Generating Nodes */
+	subgraph cluster_1 {
+		label="main";
+"2" [label="6:: int a = 10;"]
+"7" [label="0"]
+"10" [label="12:: printf('a is less than 20\n' );"]
+"11" [label="13:: }"]
+"12" [label="15:: printf('value of a is : %d\n', a);"]
+"14" [label="17:: return 0;"]
+"15" [label="4294967294::Entry"]
+"16" [label="4294967293::Exit"]
+"21" [label="10:: if( a <= 20 ) {"]
+}
+"2" -> "7" [arrowhead = normal, penwidth = 1.0, color = red, label="V1"];
+"2" -> "21" [arrowhead = normal, penwidth = 1.0, color = green, label="V2"];
+"7" -> "10" [arrowhead = normal, penwidth = 1.0, color = red, label="V1"];
+"7" -> "12" [arrowhead = normal, penwidth = 1.0, color = red, label="V1"];
+"10" -> "11" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"11" -> "12" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"12" -> "14" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"14" -> "16" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"15" -> "2" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"21" -> "10" [arrowhead = normal, penwidth = 1.0, color = green, label="V2"];
+"21" -> "12" [arrowhead = normal, penwidth = 1.0, color = green, label="V2"];
+}
