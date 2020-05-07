@@ -1,0 +1,43 @@
+digraph "MVICFG" 
+{ label="MVICFG"; 
+	subgraph cluster_1346 {
+		label="function";
+"1474" [label="560:: "]
+"1347" [label="557:: "]
+"1350" [label="0"]
+"1478" [label="574:: //Only after passing the body do we know how much space to allocate for the"]
+"1480" [label="575:: //local variables, so we write the prologue here at the end."]
+"1479" [label="574:: //Only after passing the body do we know how much space to allocate for the"]
+"1482" [label="576:: fprintf(output, '.globl %s\n'"]
+"1483" [label="576:: fprintf(output, '.globl %s\n'"]
+"1484" [label="579:: 'mov ebp, esp\n'"]
+"1358" [label="561:: int body = new_label();"]
+"1359" [label="561:: int body = new_label();"]
+"1360" [label="562:: fprintf(output, '_%08d:\n', body);"]
+"1361" [label="566:: //Epilogue"]
+"1364" [label="569:: fputs('mov esp, ebp\n'"]
+"1365" [label="567:: "]
+"1366" [label="580:: 'sub esp, %d\n'"]
+"1367" [label="4294967294::Entry"]
+"1368" [label="4294967293::Exit"]
+}
+"1347" -> "1350" [arrowhead = normal, penwidth = 1.0, color = red, label="V1"];
+"1347" -> "1474" [arrowhead = normal, penwidth = 1.0, color = green, label="V2"];
+"1350" -> "1358" [arrowhead = normal, penwidth = 1.0, color = red, label="V1"];
+"1358" -> "1359" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"1359" -> "1360" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"1360" -> "1361" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"1361" -> "1364" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"1364" -> "1365" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"1365" -> "1366" [arrowhead = normal, penwidth = 1.0, color = red, label="V1"];
+"1365" -> "1478" [arrowhead = normal, penwidth = 1.0, color = green, label="V2"];
+"1366" -> "1368" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"1367" -> "1347" [arrowhead = normal, penwidth = 1.0, color = black, label="V1,V2"];
+"1474" -> "1358" [arrowhead = normal, penwidth = 1.0, color = green, label="V2"];
+"1478" -> "1480" [arrowhead = normal, penwidth = 1.0, color = green, label="V2"];
+"1479" -> "1482" [arrowhead = normal, penwidth = 1.0, color = green, label="V2"];
+"1480" -> "1479" [arrowhead = normal, penwidth = 1.0, color = green, label="V2"];
+"1482" -> "1484" [arrowhead = normal, penwidth = 1.0, color = green, label="V2"];
+"1483" -> "1366" [arrowhead = normal, penwidth = 1.0, color = green, label="V2"];
+"1484" -> "1483" [arrowhead = normal, penwidth = 1.0, color = green, label="V2"];
+}
