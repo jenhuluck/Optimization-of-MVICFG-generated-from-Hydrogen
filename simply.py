@@ -145,7 +145,7 @@ def print_graph(nodes, edges, label_dict, lines, file, entry, exit, source_dict)
 
 	# write 0 nodes?
 	count0nodes = count_0nodes(nodes)
-	print(count0nodes)
+	#print('# 0 nodes: '+str(count0nodes))
 	if count0nodes == len(removed_lines):
 		w0nodes = True
         
@@ -244,7 +244,8 @@ def diffFiles_removedlines(file1name, file2name):
     lines = list(diff)[2:]
     #added = [line[1:] for line in lines if line[0] == '+']
     removed = [line[1:].strip() for line in lines if line[0] == '-']
-    #print('removes:')
+    #print('# removed: '+str(len(removed)))
+    #print('# added: '+str(len(added)))
     #for line in removed:
     #    print(line)
     #return added, removed
@@ -268,13 +269,8 @@ def count_0nodes_subgraph(lines):
             count += 1
         elif line[0] == "}":
             break
-    print(count)
+    #print(count)
     return count
-
-file1name = sys.argv[-2]
-file2name = sys.argv[-1]
-#added_lines, removed_lines = diffFiles_removedlines(file1name, file2name)
-removed_lines = diffFiles_removedlines(file1name, file2name)
 
 
 def get_function_name_entry_exit(sublines):
@@ -305,7 +301,7 @@ def get_call_edges(MVICFGlines):
             call.append(l[3])
             call.append(l[-2])
             calls.append(call)
-            print(call)
+            #print(call)
     return calls
 
 def get_call_label(calls, first, second):
@@ -414,7 +410,13 @@ if __name__ == '__main__':
 	# the format of the command should be like #python simply_MVICFG.py sum1.c sum2.c ...
     assert argc > 1, "Please provide source code! For example, prog.c"
     
-    readFile = open('test0/MVICFG_subcluster.dot', 'r')
+    foldername, compfiles = input('folder name: ').split()
+    
+    if 's' in compfiles:
+        subname = input('subname: ')
+        readFile = open(foldername+'/MVICFG_subcluster_'+subname+'.dot', 'r')
+    else:
+        readFile = open(foldername+'/MVICFG_subcluster.dot', 'r')
     lines = readFile.readlines()
     
     entry = find_entry(lines)
@@ -440,28 +442,43 @@ if __name__ == '__main__':
         source_dict[counter] = line.strip()
         counter += 1
     
-    writeFile = open("test0/simple.dot","w")
+    # get removed lines
+    if 'y' in compfiles:
+        file1name, file2name = input('source files of fuction: ').split()
+    else:
+        file1name = sys.argv[-2]
+        file2name = sys.argv[-1]
+    #added_lines, removed_lines = diffFiles_removedlines(file1name, file2name)
+    removed_lines = diffFiles_removedlines(file1name, file2name)
+    
+    if 's' in compfiles:
+        writeFile = open(foldername+"/simple_"+subname+".dot","w")
+    else:
+        writeFile = open(foldername+"/simple.dot","w")
     print_graph(node_set, edges, label_dict, lines, writeFile, entry, exit, source_dict)
     
     
     readFile.close()
     writeFile.close()
     
-    """
-    # combine simply subgraphs
-    MVICFGfile = open("test4/MVICFG.dot")
-    MVICFGlines = MVICFGfile.readlines()
-    MVICFGfile.close()
-    calls = get_call_edges(MVICFGlines)
     
-    mainfilename = "test4/simple_main.dot"
-    gsfilename = "test4/simple_gs.dot"
-    filenames = []
-    filenames.append(gsfilename)
-    filenames.append(mainfilename)
-    newfile = open("test4/simple.dot", "w")
-    combine_simples(filenames, newfile, calls)
-    newfile.close()
-    """
+    # combine simply subgraphs
+    if 'c' in compfiles:
+        MVICFGfile = open("test4/MVICFG.dot")
+        MVICFGlines = MVICFGfile.readlines()
+        MVICFGfile.close()
+        calls = get_call_edges(MVICFGlines)
+        
+        #mainfilename = "test4/simple_main.dot"
+        #gsfilename = "test4/simple_gs.dot"
+        n = int(input("Enter number of combining files: ")) 
+        # Below line read inputs from user using map() function  
+        filenames = list(map(str,input("\nEnter the file names: ").strip().split()))[:n] 
+        #filenames.append(gsfilename)
+        #filenames.append(mainfilename)
+        newfile = open(foldername+"/simple.dot", "w")
+        combine_simples(filenames, newfile, calls)
+        newfile.close()
+    
     
     
