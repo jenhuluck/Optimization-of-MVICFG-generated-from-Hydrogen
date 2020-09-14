@@ -1,4 +1,3 @@
-A course project of Com 513 
 
 How to run?
 python simply_MVICFG.py sum1.c sum2.c
@@ -10,7 +9,7 @@ get_subgraph.py is to generate a subgraph.dot by a given subgraph id.
 
 
 -------------------------------------------------------------------------------
-The °∞testcase°± folder contains all results of our testing.
+The ‚Äútestcase‚Äù folder contains all results of our testing.
 MVICFG_simple is the result of our basic version
 simple is the result of the evaluated version. Some have more than one simple.png. Then simple with a larger number is newer.
 Those output images could be a kind of record for our developing process.
@@ -23,7 +22,7 @@ y: want a sub name for output subcluster file; otherwise, output with default fi
 subcluster number: (number of subcluster in MVICFG.dot)
 
 subname: (subname)
-The output file will be °∞MVICFG_subcluster_subname.dot°±
+The output file will be ‚ÄúMVICFG_subcluster_subname.dot‚Äù
 
 Running simply.py:
 Command:
@@ -32,16 +31,16 @@ python simply.py path_v1_file.c path_v2_file.c
 folder name: (path_folder_name) (y/s/c/n)
 Folder name where MVICFG.dot and subcluster files are
 
-y: when simplify specific function(s) and have other c files to help get removed lines, use °Æy°Ø and will ask for the function files later.
+y: when simplify specific function(s) and have other c files to help get removed lines, use ‚Äòy‚Äô and will ask for the function files later.
 source files of fuction: (path_v1_function_file.c path_v2_function_file.c)
 
 
-s: when the subcluster file has subname, use °Æs°Ø and will ask for the subname
+s: when the subcluster file has subname, use ‚Äòs‚Äô and will ask for the subname
 Subname: (subname)
 
-c: when want to combine several subgraphs after simplifying, use °Æc°Ø and will ask for the number of combining files and simply file names for combination
+c: when want to combine several subgraphs after simplifying, use ‚Äòc‚Äô and will ask for the number of combining files and simply file names for combination
 Enter number of combining files: (number)
 Enter file names: simply_sub1.dot simply_sub2.dot ...
 
-y, s, c can be used at the same time. If do not use any of them, enter °Æn°Ø
+y, s, c can be used at the same time. If do not use any of them, enter ‚Äòn‚Äô
 In the note.txt of each test, it has the input we used for the program.
